@@ -11,6 +11,9 @@ broadcast/
 # Docs
 docs/
 
+# Ignore local env vars
+.env
+
 # Ignore Forge's fuzzing coverage files
 .forge-coverage/
 

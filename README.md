@@ -2,10 +2,20 @@
 
 Now using Foundry for the training.
 
+## Resulting artifacts
+
+SimpleStorage ([0x27bc4fdf04772d846c6ae95ef23bd7d9e481161f](https://sepolia.etherscan.io/address/0x27bc4fdf04772d846c6ae95ef23bd7d9e481161f#code))
+— stores people's name and a corresponding favourite number.
+
 ## Tips
 
-* Use `cast` to store pks: `cast wallet import defaultKey --interactive` for setting up a deafault pk
-  used, `cast wallet list` to list all the added pks.
+* Use `cast` to store pks: `cast wallet import defaultKey --interactive` for setting up a default pk
+  used, `cast wallet list` to list all the added pks. In a contract deployment command, in terminal,
+  use `--account defaultKey`.
+* Use `cast` to interact with a contract deployed locally to anvil, e.g., store a
+  value `cast send contractAddress "store(uint256)" 345 --account defaultKey`, retrieve the
+  result `cast call contractAddress "retrieve()"`, cast the result to decimals to check the
+  value `cast --to-base obtainedHexValue dec `.
 
 ## Framework of choice
 
@@ -24,52 +34,11 @@ Foundry consists of:
 
 ### Usage
 
-#### Build
-
-```shell
-$ forge build
-```
-
-#### Test
-
-```shell
-$ forge test
-```
-
-#### Format
-
-```shell
-$ forge fmt
-```
-
-#### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-#### Anvil
-
-```shell
-$ anvil
-```
-
-#### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-#### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-#### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+* Build — `forge build`
+* Tes — `forge test`
+* Format — `forge fmt`
+* Gas snapshots — `forge snapshot`
+* Anvil — `anvil`
+* Deploy — `forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>`
+* Cast — `cast <subcommand>`, e.g. `cast call senderPublicKey "retrieve()"`
+* Help — `forge --help`, `anvil --help`, `cast --help`

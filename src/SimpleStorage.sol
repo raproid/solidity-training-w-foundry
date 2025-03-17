@@ -3,7 +3,7 @@
 // state solidity version
 pragma solidity 0.8.19;
 
-// a simple smart contract
+// Stores people's names and a corresponding favourite number
 contract SimpleStorage {
     // Declare basic data types
     bool hasFavouriteNumber = true;
