@@ -2,9 +2,14 @@
 
 Now using Foundry for the training.
 
-## Foundry
+## Tips
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+* Use `cast` to store pks: `cast wallet import defaultKey --interactive` for setting up a deafault pk
+  used, `cast wallet list` to list all the added pks.
+
+## Framework of choice
+
+Foundry — a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.
 
 Foundry consists of:
 
@@ -13,55 +18,55 @@ Foundry consists of:
 - **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
 - **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
-## Documentation
+### Docs and installation
 
-https://book.getfoundry.sh/
+[Get started](https://book.getfoundry.sh/getting-started/installation) with Foundry.
 
-## Usage
+### Usage
 
-### Build
+#### Build
 
 ```shell
 $ forge build
 ```
 
-### Test
+#### Test
 
 ```shell
 $ forge test
 ```
 
-### Format
+#### Format
 
 ```shell
 $ forge fmt
 ```
 
-### Gas Snapshots
+#### Gas Snapshots
 
 ```shell
 $ forge snapshot
 ```
 
-### Anvil
+#### Anvil
 
 ```shell
 $ anvil
 ```
 
-### Deploy
+#### Deploy
 
 ```shell
 $ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
 
-### Cast
+#### Cast
 
 ```shell
 $ cast <subcommand>
 ```
 
-### Help
+#### Help
 
 ```shell
 $ forge --help
