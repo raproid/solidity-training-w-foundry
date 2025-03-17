@@ -3,7 +3,7 @@
 // state solidity version
 pragma solidity 0.8.19;
 
-// Stores people's names and a corresponding favourite number
+// Creates and stores an array of people and their fav numbers, mapping a name to a corresponding favourite number
 contract SimpleStorage {
     // Declare basic data types
     bool hasFavouriteNumber = true;
