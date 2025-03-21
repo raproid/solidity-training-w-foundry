@@ -5,6 +5,7 @@ lib/
 cache/
 out/
 zkout/
+.cache/
 
 # Ignore development broadcast logs
 broadcast/
