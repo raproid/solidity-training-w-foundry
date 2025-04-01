@@ -19,13 +19,13 @@ contract FundMe {
     // Can also use 5 * 1e18 or 5 * (10 ** 18)
     uint256 public constant MIN_USD = 5e18;
     // log senders addrs
-    address[] public funders;
+    address[] private s_funders;
     // add mapping for easier funder-amount search
-    mapping(address => uint256) public addressToAmountFunded;
+    mapping(address => uint256) private s_addressToAmountFunded;
     // Aggregator interface to facilitate deploying on different chains
     AggregatorV3Interface private s_priceFeed;
     // Set the owner of the contract
-    address public immutable i_owner;
+    address private immutable i_owner;
 
     constructor(address priceFeed) {
         i_owner = msg.sender;
@@ -36,9 +36,9 @@ contract FundMe {
         // Allow users to send money
         // Set a min USD sent (curr val 0.001 ETH)
         require(msg.value.getConversionRate(s_priceFeed) >= MIN_USD, "Min funding amount is 5 USD");
-        funders.push(msg.sender);
+        s_funders.push(msg.sender);
         // Make the sender call the func to log their addr in the funders[]
-        addressToAmountFunded[msg.sender] += msg.value;
+        s_addressToAmountFunded[msg.sender] += msg.value;
         // Add total funded to the mapping
     }
 
@@ -49,12 +49,12 @@ contract FundMe {
     function withdraw() public onlyOwner {
     // Withdraw accumulated funds to the sc owner's wallet
         // Reset all the mapping to 0
-        for(uint256  funderIndex = 0; funderIndex < funders.length; funderIndex++) {
-            address funder = funders[funderIndex];
-            addressToAmountFunded[funder] = 0;
+        for(uint256  funderIndex = 0; funderIndex < s_funders.length; funderIndex++) {
+            address funder = s_funders[funderIndex];
+            s_addressToAmountFunded[funder] = 0;
         }
         // Reset the array
-        funders = new address[](0);
+        s_funders = new address[](0);
         // payable(msg.sender).transfer(address(this).balance);
         // bool sendSuccess = payable(msg.sender).send(addresss(this).balance);
         // require(sendSuccess, "Send failed");
@@ -67,7 +67,7 @@ contract FundMe {
        // require() eats up too much gas; optimizing gas costs with revert(); not sure if implemented it correctly, as it's still passed a string down below and revert doesn't have a func syntax there
        // require(msg.sender == i_owner, "Sender is not owner");
        if (msg.sender != i_owner) {
-        revert FundMe__NotOwner("Sender is not owner");
+        revert FundMe__NotOwner("Caller is not owner");
        }
        _;
     }
@@ -80,4 +80,19 @@ contract FundMe {
     fallback() external payable {
         fund();
      }
+
+    /**
+    View, pure funcs (Getters)
+    */
+    function getAddressToAmountFunded(address fundingAddress) external view returns (uint256) {
+        return s_addressToAmountFunded[fundingAddress];
+    }
+
+    function getFunder(uint256 index) external view returns (address) {
+        return s_funders[index];
+    }
+
+    function getOwner() external view returns (address) {
+        return i_owner;
+    }
 }
