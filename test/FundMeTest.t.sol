@@ -135,6 +135,7 @@ contract FundMeTest is Test {
         assertEq(fundMe.getOwner().balance, startingOwnerBalance + startingFundMeBalance);
     }
 
+        // Let's use the cheaperWithdraw function to read from memory, not storage, using x2 less gas
         function testWithdrawFromMultipleFunders() public funded {
         // Arrange
         uint160 numberOfFunder = 10;

@@ -46,6 +46,7 @@ contract FundMe {
         return s_priceFeed.version();
     }
 
+    // Let's read from memory, not storage, using x2 less gas
     function cheaperWithdraw() public onlyOwner {
         uint256 fundersLength = s_funders.length;
         for(uint256 funderIndex = 0; funderIndex < fundersLength; funderIndex++) {
