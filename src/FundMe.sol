@@ -46,6 +46,18 @@ contract FundMe {
         return s_priceFeed.version();
     }
 
+    function cheaperWithdraw() public onlyOwner {
+        uint256 fundersLength = s_funders.length;
+        for(uint256 funderIndex = 0; funderIndex < fundersLength; funderIndex++) {
+            address funder = s_funders[funderIndex];
+            s_addressToAmountFounded[funder] = 0;
+        }
+        s_funders = new addres[](0);
+        (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
+        require(callSuccess, "Call failed");
+
+    }
+
     function withdraw() public onlyOwner {
     // Withdraw accumulated funds to the sc owner's wallet
         // Reset all the mapping to 0
