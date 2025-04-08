@@ -1,14 +1,27 @@
 # Solidity training
 
-Now using Foundry for the training.
+My Solidity training with Foundry. The source course: [Cyfrin Updraft](https://updraft.cyfrin.io/dashboard).
 
-## Resulting artifacts
+# Getting started
 
+## Requirements
+
+Ensure you have the following installed:
+* [git](https://git-scm.com/)
+* [foundry](https://book.getfoundry.sh/getting-started/installation)
+
+## Quickstart
+1. Clone the repo
+```bash
+  git clone https://github.com/raproid/solidity-training-w-foundry.git && cd solidity-training-w-foundry.git && forge build
+```
+
+## Content
 SimpleStorage ([0x27bc4fdf04772d846c6ae95ef23bd7d9e481161f](https://sepolia.etherscan.io/address/0x27bc4fdf04772d846c6ae95ef23bd7d9e481161f#code))
 — stores people's name and a corresponding favourite number.
+FundMe — a simple crowdfunding contract that allows users to fund a project and withdraw funds.
 
 ## Tips
-
 * Use `cast` to store pks: `cast wallet import defaultKey --interactive` for setting up a default pk
   used, `cast wallet list` to list all the added pks. In a contract deployment command, in terminal,
   use `--account defaultKey`.
@@ -17,23 +30,16 @@ SimpleStorage ([0x27bc4fdf04772d846c6ae95ef23bd7d9e481161f](https://sepolia.ethe
   result `cast call contractAddress "retrieve()"`, cast the result to decimals to check the
   value `cast --to-base obtainedHexValue dec `.
 
-## Framework of choice
-
-Foundry — a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.
+## About Foundry
+Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.
 
 Foundry consists of:
-
 - **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
 - **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
 - **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
 - **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
-### Docs and installation
-
-[Get started](https://book.getfoundry.sh/getting-started/installation) with Foundry.
-
-### Usage
-
+### Foundry commands
 * Build — `forge build`
 * Tes — `forge test`
 * Format — `forge fmt`
