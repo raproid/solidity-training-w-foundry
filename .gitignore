@@ -25,3 +25,6 @@ docs/
 # Ignore zksync's generated files
 anvil-zksync.log
 foundryup-zksync
+
+# Ignore local macOS files
+.DS_STORE
