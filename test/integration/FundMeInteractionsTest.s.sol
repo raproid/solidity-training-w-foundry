@@ -22,7 +22,7 @@ contract InteractionsTest is Test {
     }
 
     function testUserCanFundInteractions() public {
-        FundFundMe fundFundMe = new FundFundMe();
+        // FundFundMe fundFundMe = new FundFundMe();
 
         vm.prank(USER);
         vm.deal(USER, STARTING_BALANCE);

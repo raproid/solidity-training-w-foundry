@@ -1,7 +1,5 @@
 -include .env
 
-.PHONY: test clean deploy snapshot format
-
 # Clean the repo
 clean:
 	forge clean
@@ -22,6 +20,16 @@ format:
 snapshot:
 	forge snapshot
 
+## Deploy
+deploy:
+	@forge script script/DeployFundMe.s.sol:DeployFundMe $(NETWORK_ARGS)
+
+NETWORK_ARGS := --rpc-url http://localhost:8545 --account defaultKey --broadcast
+
+ifeq ($(findstring --network sepolia,$(ARGS)),--network sepolia)
+	NETWORK_ARGS := --rpc-url $(SEPOLIA_RPC_URL) --account $(SEPOLIA_ACCOUNT) --broadcast --verify --etherscan-api-key $(ETHERSCAN_API_KEY) -vvvv
+endif
+
 ## Deploy to Sepolia
-deploy-sepolia:;
-	forge script script/DeployFundMe.s.sol:DeployFundMe --rpc-url $(SEPOLIA_RPC_URL) --broadcast --account sepoliaKey --verify --etherscan-api-key $(ETHERSCAN_API_KEY) -vvvv
+deploy-sepolia:
+	@forge script script/DeployFundMe.s.sol:DeployFundMe $(NETWORK_ARGS)

@@ -32,6 +32,24 @@ contract FundMe {
         s_priceFeed = AggregatorV3Interface(priceFeed);
     }
 
+    modifier onlyOwner() {
+       // require() eats up too much gas; optimizing gas costs with revert(); not sure if implemented it correctly, as it's still passed a string down below and revert doesn't have a func syntax there
+       // require(msg.sender == i_owner, "Sender is not owner");
+       if (msg.sender != i_owner) {
+        revert FundMe__NotOwner("Caller is not owner");
+       }
+       _;
+    }
+
+    // If somebody sends ETH to this contract/sends data without calling fund() , redirect them to fund()
+    receive() external payable {
+        fund();
+    }
+
+    fallback() external payable {
+        fund();
+     }
+
     function fund() public payable {
         // Allow users to send money
         // Set a min USD sent (curr val 0.001 ETH)
@@ -75,24 +93,6 @@ contract FundMe {
         (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSuccess, "Call failed");
     }
-
-    modifier onlyOwner() {
-       // require() eats up too much gas; optimizing gas costs with revert(); not sure if implemented it correctly, as it's still passed a string down below and revert doesn't have a func syntax there
-       // require(msg.sender == i_owner, "Sender is not owner");
-       if (msg.sender != i_owner) {
-        revert FundMe__NotOwner("Caller is not owner");
-       }
-       _;
-    }
-
-    // If somebody sends ETH to this contract/sends data without calling fund() , redirect them to fund()
-    receive() external payable {
-        fund();
-    }
-
-    fallback() external payable {
-        fund();
-     }
 
     /**
     View, pure funcs (Getters)
