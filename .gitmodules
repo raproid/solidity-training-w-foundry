@@ -9,3 +9,7 @@
 	path = lib/foundry-devops
 	url = https://github.com/Cyfrin/foundry-devops
 	ignore = all
+[submodule "lib/solmate"]
+	path = lib/solmate
+	url = https://github.com/transmissions11/solmate
+    ignore = all
