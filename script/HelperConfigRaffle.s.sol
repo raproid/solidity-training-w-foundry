@@ -28,6 +28,7 @@ contract HelperConfig is CodeConstants, Script {
         uint256 subscriptionId;
         uint32 callbackGasLimit;
         address link;
+        address account;
     }
 
     // State
@@ -62,7 +63,8 @@ contract HelperConfig is CodeConstants, Script {
             gasLane: 0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae,
             subscriptionId: 60504467104840301252610174539706716424669871052824596520673806570685499709170,
             callbackGasLimit: 500000,
-            link: 0x779877A7B0D9E8603169DdbD7836e478b4624789
+            link: 0x779877A7B0D9E8603169DdbD7836e478b4624789,
+            account: 0x437bE195560A18b02F8dc45642eA5214e6172dBb
         });
     }
 
@@ -83,7 +85,8 @@ contract HelperConfig is CodeConstants, Script {
             gasLane: bytes32(0), // placeholder, mock doesn't need it
             subscriptionId: 0,
             callbackGasLimit: 500000,
-            link: address(linkToken)
+            link: address(linkToken),
+            account: 0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38
         });
         return localNetworkConfig;
     }
